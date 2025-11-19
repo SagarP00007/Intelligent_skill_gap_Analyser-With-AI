@@ -1,0 +1,22 @@
+{
+	"roles": {
+	  "frontend_dev": {
+		"title": "Frontend Developer",
+		"skills": ["HTML","CSS","JavaScript","React","Responsive Design","Web Performance"],
+		"resources": [
+		  {"title": "Modern HTML & CSS", "url": "https://example.com/html-css"},
+		  {"title": "JavaScript: The Hard Parts", "url": "https://example.com/js"},
+		  {"title": "React Beginner to Pro", "url": "https://example.com/react"}
+		]
+	  },
+	  "data_scientist": {
+		"title": "Data Scientist",
+		"skills": ["Python","Pandas","Statistics","Machine Learning","SQL","Data Visualization"],
+		"resources": [
+		  {"title": "Python for Data Science", "url": "https://example.com/py-ds"},
+		  {"title": "Intro to ML", "url": "https://example.com/ml"}
+		]
+	  }
+	}
+  }
+  
