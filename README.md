@@ -59,8 +59,8 @@ LevelUp/
 Make sure Python 3 is installed.
 pip install flask
 
-Start the Flask Server
-python app.py
+Start the Flask Server by running this command in terminal inside your project folder -
+"python app.py"
 
 Open in Browser
 Visit:
