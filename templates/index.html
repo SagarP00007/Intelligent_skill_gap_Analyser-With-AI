@@ -1,31 +1,71 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LevelUp – Skill Gap Analyzer</title>
+    <title>LevelUp – Intelligent Skill Gap Analyzer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <!-- Phosphor Icons for modern iconography -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
 </head>
+
 <body>
-    <div class="container">
-        <h1>LevelUp – Intelligent Skill Gap Analyzer</h1>
-        <p>Find out which skills you need for your dream role!</p>
-
-        <label for="career">Select Career Role:</label>
-        <select id="career">
-            <option>Data Scientist</option>
-            <option>Web Developer</option>
-            <option>AI Engineer</option>
-        </select>
-
-        <label for="skills">Enter Your Current Skills (comma-separated):</label>
-        <input type="text" id="skills" placeholder="e.g., Python, HTML, CSS">
-
-        <button id="analyzeBtn">Analyze Skill Gap</button>
-
-        <div id="result"></div>
+    <div class="background-blobs">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
     </div>
+
+    <main class="glass-container">
+        <header>
+            <div class="logo-area">
+                <i class="ph-fill ph-rocket-launch logo-icon"></i>
+                <h1>LevelUp</h1>
+            </div>
+            <p class="subtitle">Intelligent Skill Gap Analyzer</p>
+            <p class="description">Discover the precise skills you need to bridge the gap to your dream career.</p>
+        </header>
+
+        <section class="input-section">
+            <div class="form-group">
+                <label for="career"><i class="ph-bold ph-briefcase"></i> Target Role</label>
+                <div class="select-wrapper">
+                    <select id="career">
+                        <option value="" disabled selected>Select your dream role...</option>
+                        {% for role in roles %}
+                        <option value="{{ role.key }}">{{ role.title }}</option>
+                        {% endfor %}
+                    </select>
+                    <i class="ph-bold ph-caret-down select-icon"></i>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="skills"><i class="ph-bold ph-code"></i> Current Skills</label>
+                <input type="text" id="skills" placeholder="e.g. Python, React, SQL (comma separated)">
+            </div>
+
+            <button id="analyzeBtn">
+                <span>Analyze Gap</span>
+                <i class="ph-bold ph-arrow-right"></i>
+            </button>
+        </section>
+
+        <div id="loading" class="hidden">
+            <div class="spinner"></div>
+            <p>Analyzing market trends & your profile...</p>
+        </div>
+
+        <section id="result" class="result-section hidden">
+            <!-- Results will be injected here JS -->
+        </section>
+    </main>
 
     <script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
+
 </html>

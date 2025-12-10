@@ -1,22 +1,275 @@
 {
 	"roles": {
-	  "frontend_dev": {
-		"title": "Frontend Developer",
-		"skills": ["HTML","CSS","JavaScript","React","Responsive Design","Web Performance"],
-		"resources": [
-		  {"title": "Modern HTML & CSS", "url": "https://example.com/html-css"},
-		  {"title": "JavaScript: The Hard Parts", "url": "https://example.com/js"},
-		  {"title": "React Beginner to Pro", "url": "https://example.com/react"}
-		]
-	  },
-	  "data_scientist": {
-		"title": "Data Scientist",
-		"skills": ["Python","Pandas","Statistics","Machine Learning","SQL","Data Visualization"],
-		"resources": [
-		  {"title": "Python for Data Science", "url": "https://example.com/py-ds"},
-		  {"title": "Intro to ML", "url": "https://example.com/ml"}
-		]
-	  }
+		"web_developer": {
+			"title": "Web Developer",
+			"skills": [
+				"HTML5",
+				"CSS3",
+				"JavaScript (ES6+)",
+				"React.js",
+				"Node.js",
+				"Express.js",
+				"MongoDB",
+				"SQL",
+				"Git/GitHub",
+				"Responsive Design",
+				"REST APIs",
+				"TypeScript",
+				"Tailwind CSS"
+			],
+			"resources": [
+				{
+					"title": "MDN Web Docs",
+					"url": "https://developer.mozilla.org/"
+				},
+				{
+					"title": "React Official",
+					"url": "https://react.dev/learn"
+				},
+				{
+					"title": "Full Stack Open",
+					"url": "https://fullstackopen.com/en/"
+				}
+			]
+		},
+		"data_scientist": {
+			"title": "Data Scientist",
+			"skills": [
+				"Python",
+				"SQL",
+				"Pandas",
+				"NumPy",
+				"Matplotlib",
+				"Seaborn",
+				"Scikit-learn",
+				"TensorFlow/PyTorch",
+				"Statistics",
+				"Data Visualization",
+				"Jupyter",
+				"Big Data (Spark)"
+			],
+			"resources": [
+				{
+					"title": "Kaggle Learn",
+					"url": "https://www.kaggle.com/learn"
+				},
+				{
+					"title": "Fast.ai",
+					"url": "https://course.fast.ai/"
+				}
+			]
+		},
+		"ai_engineer": {
+			"title": "AI Engineer",
+			"skills": [
+				"Python",
+				"PyTorch",
+				"TensorFlow",
+				"NLP",
+				"Computer Vision",
+				"Transformers",
+				"MLOps",
+				"Docker",
+				"AWS/Google Cloud",
+				"Linear Algebra",
+				"Reinforcement Learning"
+			],
+			"resources": [
+				{
+					"title": "Hugging Face Course",
+					"url": "https://huggingface.co/course/chapter1/1"
+				},
+				{
+					"title": "DeepLearning.AI",
+					"url": "https://www.deeplearning.ai/"
+				}
+			]
+		},
+		"devops_engineer": {
+			"title": "DevOps Engineer",
+			"skills": [
+				"Linux",
+				"Bash Scripting",
+				"Docker",
+				"Kubernetes",
+				"Jenkins/GitLab CI",
+				"Terraform",
+				"Ansible",
+				"AWS/Azure",
+				"Prometheus/Grafana",
+				"Python/Go",
+				"Networking"
+			],
+			"resources": [
+				{
+					"title": "DevOps Roadmap",
+					"url": "https://roadmap.sh/devops"
+				},
+				{
+					"title": "Kubernetes Basics",
+					"url": "https://kubernetes.io/docs/tutorials/kubernetes-basics/"
+				}
+			]
+		},
+		"cyber_security_analyst": {
+			"title": "Cyber Security Analyst",
+			"skills": [
+				"Network Security",
+				"Linux",
+				"Python Scripting",
+				"Metasploit",
+				"Wireshark",
+				"SIEM (Splunk)",
+				"Cryptography",
+				"Ethical Hacking",
+				"Risk Assessment",
+				"OWASP Top 10"
+			],
+			"resources": [
+				{
+					"title": "TryHackMe",
+					"url": "https://tryhackme.com/"
+				},
+				{
+					"title": "OWASP",
+					"url": "https://owasp.org/"
+				}
+			]
+		},
+		"mobile_developer": {
+			"title": "Mobile App Developer",
+			"skills": [
+				"React Native",
+				"Flutter",
+				"Swift (iOS)",
+				"Kotlin (Android)",
+				"Firebase",
+				"Mobile UI Design",
+				"REST APIs",
+				"State Management",
+				"App Store Deployment"
+			],
+			"resources": [
+				{
+					"title": "Flutter Dev",
+					"url": "https://flutter.dev/docs"
+				},
+				{
+					"title": "React Native Docs",
+					"url": "https://reactnative.dev/"
+				}
+			]
+		},
+		"cloud_architect": {
+			"title": "Cloud Architect",
+			"skills": [
+				"AWS Solutions Architect",
+				"Azure Fundamentals",
+				"Google Cloud Platform",
+				"Microservices",
+				"Serverless Computing",
+				"System Design",
+				"Load Balancing",
+				"VPC/Networking",
+				"IAM Security"
+			],
+			"resources": [
+				{
+					"title": "AWS Training",
+					"url": "https://aws.amazon.com/training/"
+				}
+			]
+		},
+		"ui_ux_designer": {
+			"title": "UI/UX Designer",
+			"skills": [
+				"Figma",
+				"Adobe XD",
+				"Wireframing",
+				"Prototyping",
+				"User Research",
+				"Interaction Design",
+				"Color Theory",
+				"Typography",
+				"Accessibility (WCAG)",
+				"HTML/CSS Basics"
+			],
+			"resources": [
+				{
+					"title": "Figma Learn",
+					"url": "https://help.figma.com/hc/en-us"
+				},
+				{
+					"title": "Laws of UX",
+					"url": "https://lawsofux.com/"
+				}
+			]
+		},
+		"blockchain_developer": {
+			"title": "Blockchain Developer",
+			"skills": [
+				"Solidity",
+				"Smart Contracts",
+				"Ethereum",
+				"Web3.js/Ethers.js",
+				"Cryptography",
+				"Consensus Algorithms",
+				"Hardhat/Truffle",
+				"Rust (Solana)",
+				"DeFi Basics"
+			],
+			"resources": [
+				{
+					"title": "CryptoZombies",
+					"url": "https://cryptozombies.io/"
+				},
+				{
+					"title": "Ethereum Docs",
+					"url": "https://ethereum.org/en/developers/"
+				}
+			]
+		},
+		"game_developer": {
+			"title": "Game Developer",
+			"skills": [
+				"C#",
+				"C++",
+				"Unity 3D",
+				"Unreal Engine",
+				"3D Math",
+				"Game Physics",
+				"Shader Programming",
+				"Level Design",
+				"git-lfs"
+			],
+			"resources": [
+				{
+					"title": "Unity Learn",
+					"url": "https://learn.unity.com/"
+				},
+				{
+					"title": "Unreal Engine Online Learning",
+					"url": "https://www.unrealengine.com/en-US/onlinelearning-courses"
+				}
+			]
+		},
+		"quantum_researcher": {
+			"title": "Quantum Computing Researcher",
+			"skills": [
+				"Python",
+				"Qiskit",
+				"Linear Algebra",
+				"Quantum Mechanics",
+				"Quantum Algorithms",
+				"Circuit Design",
+				"Error Correction"
+			],
+			"resources": [
+				{
+					"title": "Qiskit Textbook",
+					"url": "https://qiskit.org/textbook/preface.html"
+				}
+			]
+		}
 	}
-  }
-  
+}
