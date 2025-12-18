@@ -1,34 +1,37 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends "base.html" %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LevelUp – Intelligent Skill Gap Analyzer</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-    <!-- Phosphor Icons for modern iconography -->
-    <script src="https://unpkg.com/@phosphor-icons/web"></script>
-</head>
-
-<body>
-    <div class="background-blobs">
-        <div class="blob blob-1"></div>
-        <div class="blob blob-2"></div>
-        <div class="blob blob-3"></div>
+{% block content %}
+<div class="dashboard-grid">
+    <!-- Header / Stats Card (Full Width) -->
+    <div class="dashboard-card col-span-12">
+        <header
+            style="margin-bottom:0; text-align: left; display: flex; justify-content: space-between; align-items: center;">
+            <div class="logo-area" style="margin-bottom:0; justify-content:flex-start;">
+                <i class="ph-fill ph-rocket-launch logo-icon"></i>
+                <div style="display:flex; flex-direction:column; align-items:flex-start;">
+                    <h1 style="font-size:1.8rem; margin:0;">LevelUp</h1>
+                    <p class="description" style="margin:0; font-size:0.85rem;">Intelligent Skill Gap Analyzer</p>
+                </div>
+            </div>
+            <!-- Quick Stats or Search could go here -->
+            <div style="display:flex; gap:10px;">
+                <button class="icon-btn"
+                    style="background:rgba(255,255,255,0.1); width:40px; height:40px; padding:0;"><i
+                        class="ph-bold ph-bell"></i></button>
+                <button class="icon-btn"
+                    style="background:rgba(255,255,255,0.1); width:40px; height:40px; padding:0;"><i
+                        class="ph-bold ph-gear"></i></button>
+            </div>
+        </header>
     </div>
 
-    <main class="glass-container">
-        <header>
-            <div class="logo-area">
-                <i class="ph-fill ph-rocket-launch logo-icon"></i>
-                <h1>LevelUp</h1>
-            </div>
-            <p class="subtitle">Intelligent Skill Gap Analyzer</p>
-            <p class="description">Discover the precise skills you need to bridge the gap to your dream career.</p>
-        </header>
+    <!-- ROW 1: Configuration & Resume (Side by Side) -->
+
+    <!-- Configuration Section (Left) -->
+    <div class="dashboard-card col-span-6">
+        <div class="card-header">
+            <span class="card-title"><i class="ph-bold ph-sliders-horizontal card-icon"></i> Configuration</span>
+        </div>
 
         <section class="input-section">
             <div class="form-group">
@@ -45,27 +48,101 @@
             </div>
 
             <div class="form-group">
-                <label for="skills"><i class="ph-bold ph-code"></i> Current Skills</label>
-                <input type="text" id="skills" placeholder="e.g. Python, React, SQL (comma separated)">
+                <label><i class="ph-bold ph-code"></i> Add Skills</label>
+                <div class="skill-input-group" style="flex-direction:column;">
+                    <input type="text" id="skillName" placeholder="Skill Name">
+                    <div style="display:flex; gap:10px;">
+                        <div class="select-wrapper" style="flex:1;">
+                            <select id="proficiencyLevel">
+                                <option value="" disabled selected>Level</option>
+                                <option value="Beginner">Beginner</option>
+                                <option value="Intermediate">Intermediate</option>
+                                <option value="Advanced">Advanced</option>
+                                <option value="Expert">Expert</option>
+                            </select>
+                            <i class="ph-bold ph-caret-down select-icon"></i>
+                        </div>
+                        <button type="button" id="addSkillBtn" class="icon-btn" style="width:50px;">
+                            <i class="ph-bold ph-plus"></i>
+                        </button>
+                    </div>
+                </div>
             </div>
 
-            <button id="analyzeBtn">
+            <div id="skillsList" class="skills-list">
+                <!-- Added skills -->
+            </div>
+
+            <button id="analyzeBtn" style="margin-top:20px; width:100%;">
                 <span>Analyze Gap</span>
                 <i class="ph-bold ph-arrow-right"></i>
             </button>
         </section>
+    </div>
 
-        <div id="loading" class="hidden">
+    <!-- Resume Analysis Section (Right) -->
+    <div class="dashboard-card col-span-6">
+        <div class="card-header" style="cursor: pointer;" onclick="toggleResumeSection()">
+            <span class="card-title"><i class="ph-bold ph-file-text card-icon"></i> AI Resume Scanner</span>
+            <i class="ph-bold ph-caret-down" id="resumeToggleIcon"></i>
+        </div>
+
+        <div id="resumeSection" class="hidden" style="margin-bottom: 20px; padding-bottom: 20px;">
+            <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 10px;">
+                Upload your resume (PDF, DOCX, TXT) to auto-extract skills.
+            </p>
+
+            <div id="dropZone" style="
+                border: 2px dashed var(--glass-border);
+                border-radius: 8px;
+                padding: 20px;
+                text-align: center;
+                margin-bottom: 15px;
+                cursor: pointer;
+                transition: all 0.2s;
+                background: rgba(15, 23, 42, 0.4);
+            " ondragover="event.preventDefault(); this.style.borderColor='var(--primary-color)';"
+                ondragleave="this.style.borderColor='var(--glass-border)';"
+                ondrop="event.preventDefault(); this.style.borderColor='var(--glass-border)'; handleDrop(event);">
+                <i class="ph-bold ph-upload-simple"
+                    style="font-size: 1.5rem; color: var(--primary-color); margin-bottom: 5px;"></i>
+                <p style="font-size: 0.9rem;">Click or Drag file here</p>
+                <input type="file" id="resumeFile" accept=".pdf,.docx,.txt" style="display: none;"
+                    onchange="handleFileSelect(this)">
+                <p id="fileName"
+                    style="font-size: 0.8rem; color: var(--success-color); margin-top: 5px; height: 1.2em;"></p>
+            </div>
+
+            <button type="button" id="extractSkillsBtn" style="width: 100%; font-size: 0.95rem; padding: 12px;">
+                <i class="ph-bold ph-magic-wand"></i> Extract Skills from File
+            </button>
+            <div id="extractLoading" class="hidden"
+                style="text-align: center; margin-top: 10px; font-size: 0.9rem; color: var(--accent-color);">
+                <i class="ph-bold ph-spinner ph-spin"></i> Analyzing...
+            </div>
+        </div>
+    </div>
+
+    <!-- ROW 2: Results (Full Width) -->
+
+    <!-- Results Column (Bottom) -->
+    <div class="dashboard-card col-span-12" style="min-height: 500px;">
+        <div class="card-header">
+            <span class="card-title"><i class="ph-bold ph-chart-bar card-icon"></i> Analysis Results</span>
+        </div>
+
+        <div id="loading" class="hidden" style="margin-top:50px;">
             <div class="spinner"></div>
             <p>Analyzing market trends & your profile...</p>
         </div>
 
         <section id="result" class="result-section hidden">
             <!-- Results will be injected here JS -->
+            <div style="text-align:center; color:var(--text-muted); padding-top:50px;">
+                <i class="ph-duotone ph-chart-pie-slice" style="font-size:3rem; opacity:0.5; margin-bottom:10px;"></i>
+                <p>Select a role and add skills to start analysis.</p>
+            </div>
         </section>
-    </main>
-
-    <script src="{{ url_for('static', filename='script.js') }}"></script>
-</body>
-
-</html>
+    </div>
+</div>
+{% endblock %}

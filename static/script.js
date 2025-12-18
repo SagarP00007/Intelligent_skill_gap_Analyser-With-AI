@@ -1,13 +1,81 @@
+let currentSkills = [];
+
+// Add Skill Button Handler
+document.getElementById("addSkillBtn").addEventListener("click", () => {
+    const skillNameInput = document.getElementById("skillName");
+    const proficiencySelect = document.getElementById("proficiencyLevel");
+
+    const name = skillNameInput.value.trim();
+    const level = proficiencySelect.value;
+
+    if (!name) {
+        alert("Please enter a skill name.");
+        return;
+    }
+
+    if (!level) {
+        alert("Please select a proficiency level.");
+        return;
+    }
+
+    // Check for duplicates
+    if (currentSkills.some(skill => skill.name.toLowerCase() === name.toLowerCase())) {
+        alert("This skill is already added.");
+        return;
+    }
+
+    currentSkills.push({ name, level });
+    renderSkills();
+
+    // Reset inputs
+    skillNameInput.value = "";
+    proficiencySelect.value = "";
+    skillNameInput.focus();
+});
+
+function renderSkills() {
+    const listContainer = document.getElementById("skillsList");
+    listContainer.innerHTML = "";
+
+    currentSkills.forEach((skill, index) => {
+        const tag = document.createElement("div");
+        tag.className = "skill-entry";
+        tag.innerHTML = `
+            <div class="skill-info">
+                <span class="skill-name">${skill.name}</span>
+                <span class="skill-level">${skill.level}</span>
+            </div>
+            <button class="remove-skill-btn" onclick="removeSkill(${index})">
+                <i class="ph-bold ph-x"></i>
+            </button>
+        `;
+        listContainer.appendChild(tag);
+    });
+}
+
+// Global function to remove skill (accessible from onclick)
+window.removeSkill = (index) => {
+    currentSkills.splice(index, 1);
+    renderSkills();
+};
+
 document.getElementById("analyzeBtn").addEventListener("click", async () => {
     const career = document.getElementById("career").value;
-    const skills = document.getElementById("skills").value.trim();
     const resultDiv = document.getElementById("result");
     const loadingDiv = document.getElementById("loading");
     const btn = document.getElementById("analyzeBtn");
 
+    // Convert structured skills to comma-separated string for backend compatibility
+    const skillsString = currentSkills.map(s => s.name).join(", ");
+
     // Validation
-    if (!career || !skills) {
-        alert("Please select a career role and enter your current skills.");
+    if (!career) {
+        alert("Please select a target role.");
+        return;
+    }
+
+    if (currentSkills.length === 0) {
+        alert("Please add at least one skill.");
         return;
     }
 
@@ -22,7 +90,7 @@ document.getElementById("analyzeBtn").addEventListener("click", async () => {
         const response = await fetch("/api/analyze", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ career, skills })
+            body: JSON.stringify({ career, skills: skillsString })
         });
 
         const data = await response.json();
