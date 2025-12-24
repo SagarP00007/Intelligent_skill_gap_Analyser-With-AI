@@ -137,10 +137,54 @@
         </div>
 
         <section id="result" class="result-section hidden">
-            <!-- Results will be injected here JS -->
-            <div style="text-align:center; color:var(--text-muted); padding-top:50px;">
-                <i class="ph-duotone ph-chart-pie-slice" style="font-size:3rem; opacity:0.5; margin-bottom:10px;"></i>
-                <p>Select a role and add skills to start analysis.</p>
+            <!-- Market Data Banner -->
+            <div id="marketData" class="market-banner hidden">
+                <!-- Injected via JS -->
+            </div>
+
+            <div class="results-grid"
+                style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 20px;">
+                <!-- Left: Missing Skills & Recommendations -->
+                <div class="skills-column">
+                    <div class="result-header">
+                        <i class="ph-bold ph-warning-circle"></i> Skill Gap Analysis
+                    </div>
+                    <div id="missingSkillsContainer" class="tags-container"></div>
+
+                    <!-- Quiz Call to Action -->
+                    <div id="quizCTA" class="quiz-cta hidden"
+                        style="margin-top: 20px; padding: 15px; background: rgba(var(--primary-rgb), 0.1); border-radius: 8px; border: 1px solid var(--primary-color);">
+                        <h4><i class="ph-bold ph-exam"></i> Test Your Knowledge</h4>
+                        <p style="font-size: 0.9rem; margin-bottom: 10px;">Take a quick 3-question quiz for this role.
+                        </p>
+                        <button id="startQuizBtn" class="small-btn">Start Quiz</button>
+                    </div>
+
+                    <div class="result-header" style="margin-top:20px;">
+                        <i class="ph-bold ph-strategy"></i> Recommended Resources
+                    </div>
+                    <ul id="recommendationsList" class="recommendations-list"></ul>
+                </div>
+
+                <!-- Right: Learning Roadmap -->
+                <div class="roadmap-column">
+                    <div class="result-header">
+                        <i class="ph-bold ph-path"></i> Learning Roadmap
+                    </div>
+                    <div id="roadmapContainer" class="roadmap-timeline">
+                        <!-- Injected via JS -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quiz Modal -->
+            <div id="quizModal" class="modal hidden">
+                <div class="modal-content">
+                    <span class="close-modal">&times;</span>
+                    <h3>Skill Quiz</h3>
+                    <div id="quizQuestions"></div>
+                    <div id="quizResult" class="hidden"></div>
+                </div>
             </div>
         </section>
     </div>

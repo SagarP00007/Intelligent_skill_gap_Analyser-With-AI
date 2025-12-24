@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request, jsonify, redirect, url_for, flash
+from datetime import datetime
 import json
 import os
 import re
@@ -25,6 +26,15 @@ class User(UserMixin, db.Model):
     username = db.Column(db.String(150), unique=True, nullable=False)
     email = db.Column(db.String(150), unique=True, nullable=False)
     password = db.Column(db.String(150), nullable=False)
+    analyses = db.relationship('AnalysisHistory', backref='user', lazy=True)
+
+class AnalysisHistory(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    role_title = db.Column(db.String(100), nullable=False)
+    missing_count = db.Column(db.Integer, nullable=False)
+    total_skills = db.Column(db.Integer, nullable=False)
+    timestamp = db.Column(db.DateTime, default=datetime.utcnow)
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -82,7 +92,9 @@ def analyze():
     return jsonify({
         "career": career_display_name,
         "missing_skills": missing,
-        "recommendations": recommendations
+        "recommendations": recommendations,
+        "market_data": role_info.get('market_data', {}),
+        "roadmap": role_info.get('roadmap', [])
     })
 
 @app.route('/api/extract_skills', methods=['POST'])
@@ -138,6 +150,38 @@ def extract_skills():
             found_skills.add(skill)
             
     return jsonify({"skills": list(found_skills)})
+
+@app.route('/api/save_analysis', methods=['POST'])
+@login_required
+def save_analysis():
+    data = request.json
+    new_analysis = AnalysisHistory(
+        user_id=current_user.id,
+        role_title=data['role'],
+        missing_count=data['missing_count'],
+        total_skills=data['total_skills']
+    )
+    db.session.add(new_analysis)
+    db.session.commit()
+    return jsonify({"message": "Saved successfully"})
+
+@app.route('/api/history')
+@login_required
+def get_history():
+    history = AnalysisHistory.query.filter_by(user_id=current_user.id).order_by(AnalysisHistory.timestamp.desc()).all()
+    return jsonify([{
+        "role": h.role_title,
+        "missing": h.missing_count,
+        "total": h.total_skills,
+        "date": h.timestamp.strftime('%Y-%m-%d')
+    } for h in history])
+
+@app.route('/api/quiz/<role_key>')
+def get_quiz(role_key):
+    skills_data = load_skills()
+    if role_key in skills_data['roles'] and 'quiz' in skills_data['roles'][role_key]:
+        return jsonify(skills_data['roles'][role_key]['quiz'])
+    return jsonify([])
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():

@@ -12,16 +12,13 @@
 	<link rel="stylesheet" href="{{ url_for('static', filename='auth_style.css') }}">
 	<link rel="stylesheet" href="{{ url_for('static', filename='proficiency.css') }}">
 	<link rel="stylesheet" href="{{ url_for('static', filename='dashboard.css') }}">
+	<link rel="stylesheet" href="{{ url_for('static', filename='features.css') }}">
 	<!-- Phosphor Icons for modern iconography -->
 	<script src="https://unpkg.com/@phosphor-icons/web"></script>
 </head>
 
 <body>
-	<div class="background-blobs">
-		<div class="blob blob-1"></div>
-		<div class="blob blob-2"></div>
-		<div class="blob blob-3"></div>
-	</div>
+	<div id="canvas-container" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;"></div>
 
 	<main class="app-container">
 		<nav class="auth-nav">
@@ -36,6 +33,11 @@
 
 		{% block content %}{% endblock %}
 	</main>
+
+	<!-- Three.js from CDN -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+	<!-- Vanta.js (optional, but let's stick to raw Three.js for control as planned) OR custom script -->
+	<script src="{{ url_for('static', filename='background_3d.js') }}"></script>
 
 	<script src="{{ url_for('static', filename='script.js') }}"></script>
 	<script src="{{ url_for('static', filename='resume_logic.js') }}"></script>

@@ -30,6 +30,73 @@
 					"title": "Full Stack Open",
 					"url": "https://fullstackopen.com/en/"
 				}
+			],
+			"market_data": {
+				"avg_salary": "$95,000",
+				"open_roles": "45,000+",
+				"growth_rate": "+13%"
+			},
+			"roadmap": [
+				{
+					"step": 1,
+					"topic": "Frontend Foundations",
+					"description": "Master HTML5 semantic tags and CSS3 flexbox/grid layouts."
+				},
+				{
+					"step": 2,
+					"topic": "JavaScript Mastery",
+					"description": "Learn ES6+, DOM manipulation, Fetch API, and async/await."
+				},
+				{
+					"step": 3,
+					"topic": "Frontend Frameworks",
+					"description": "Build dynamic SPAs using React.js and understand state management."
+				},
+				{
+					"step": 4,
+					"topic": "Backend Basics",
+					"description": "Create RESTful APIs with Node.js and Express."
+				},
+				{
+					"step": 5,
+					"topic": "Database Integration",
+					"description": "Connect your apps to MongoDB (NoSQL) or PostgreSQL (SQL)."
+				}
+			],
+			"quiz": [
+				{
+					"id": 1,
+					"question": "Which HTML tag is used to define an internal style sheet?",
+					"options": [
+						"<css>",
+						"<script>",
+						"<style>",
+						"<link>"
+					],
+					"correct": 2
+				},
+				{
+					"id": 2,
+					"question": "What is the purpose of 'useEffect' in React?",
+					"options": [
+						"To manage state",
+						"To handle side effects",
+						"To create components",
+						"To route pages"
+					],
+					"correct": 1
+				},
+				{
+					"id": 3,
+					"question": "Which HTTP method is typically used to update a resource?",
+					"options": [
+						"GET",
+						"POST",
+						"PUT",
+						"DELETE"
+					],
+					"correct": 2
+				}
 			]
 		},
 		"data_scientist": {
@@ -57,6 +124,73 @@
 					"title": "Fast.ai",
 					"url": "https://course.fast.ai/"
 				}
+			],
+			"market_data": {
+				"avg_salary": "$125,000",
+				"open_roles": "22,000+",
+				"growth_rate": "+21%"
+			},
+			"roadmap": [
+				{
+					"step": 1,
+					"topic": "Python & Logic",
+					"description": "Master Python syntax, data structures, and algorithms."
+				},
+				{
+					"step": 2,
+					"topic": "Data Manipulation",
+					"description": "Learn to clean and manipulate data using Pandas and NumPy."
+				},
+				{
+					"step": 3,
+					"topic": "Exploratory Data Analysis",
+					"description": "Visualize data insights with Matplotlib and Seaborn."
+				},
+				{
+					"step": 4,
+					"topic": "Machine Learning",
+					"description": "Build predictive models using Scikit-learn."
+				},
+				{
+					"step": 5,
+					"topic": "Deep Learning",
+					"description": "Dive into neural networks with TensorFlow or PyTorch."
+				}
+			],
+			"quiz": [
+				{
+					"id": 1,
+					"question": "Which library is primarily used for data manipulation in Python?",
+					"options": [
+						"Numpy",
+						"Pandas",
+						"Matplotlib",
+						"Scikit"
+					],
+					"correct": 1
+				},
+				{
+					"id": 2,
+					"question": "What is 'overfitting' in Machine Learning?",
+					"options": [
+						"Model performs poorly on training data",
+						"Model performs well on training data but poorly on new data",
+						"Model is too simple",
+						"Model has too few parameters"
+					],
+					"correct": 1
+				},
+				{
+					"id": 3,
+					"question": "Which plot is best for showing distribution of a dataset?",
+					"options": [
+						"Scatter Plot",
+						"Bar Chart",
+						"Histogram",
+						"Line Chart"
+					],
+					"correct": 2
+				}
 			]
 		},
 		"ai_engineer": {
@@ -82,6 +216,62 @@
 				{
 					"title": "DeepLearning.AI",
 					"url": "https://www.deeplearning.ai/"
+				}
+			],
+			"market_data": {
+				"avg_salary": "$145,000",
+				"open_roles": "18,000+",
+				"growth_rate": "+35%"
+			},
+			"roadmap": [
+				{
+					"step": 1,
+					"topic": "Foundations",
+					"description": "Linear Algebra, Calculus, and Advanced Python."
+				},
+				{
+					"step": 2,
+					"topic": "Neural Networks",
+					"description": "Build networks from scratch and understand backpropagation."
+				},
+				{
+					"step": 3,
+					"topic": "Modern Architectures",
+					"description": "Transformers, CNNs, and RNNs."
+				},
+				{
+					"step": 4,
+					"topic": "LLMs & GenAI",
+					"description": "Fine-tuning models and prompt engineering."
+				},
+				{
+					"step": 5,
+					"topic": "MLOps",
+					"description": "Deploying models to production with Docker and Cloud."
+				}
+			],
+			"quiz": [
+				{
+					"id": 1,
+					"question": "What is the core component of a Transformer model?",
+					"options": [
+						"Convolution",
+						"Self-Attention",
+						"Recurrent Layers",
+						"Gradient Boosting"
+					],
+					"correct": 1
+				},
+				{
+					"id": 2,
+					"question": "Which framework is developed by Meta (Facebook)?",
+					"options": [
+						"TensorFlow",
+						"PyTorch",
+						"JAX",
+						"Keras"
+					],
+					"correct": 1
 				}
 			]
 		},
@@ -109,6 +299,62 @@
 					"title": "Kubernetes Basics",
 					"url": "https://kubernetes.io/docs/tutorials/kubernetes-basics/"
 				}
+			],
+			"market_data": {
+				"avg_salary": "$115,000",
+				"open_roles": "30,000+",
+				"growth_rate": "+18%"
+			},
+			"roadmap": [
+				{
+					"step": 1,
+					"topic": "Linux & Scripting",
+					"description": "Master the terminal and Bash/Python scripting."
+				},
+				{
+					"step": 2,
+					"topic": "Containerization",
+					"description": "Package applications using Docker."
+				},
+				{
+					"step": 3,
+					"topic": "Orchestration",
+					"description": "Manage containers at scale with Kubernetes."
+				},
+				{
+					"step": 4,
+					"topic": "IaC",
+					"description": "Infrastructure as Code with Terraform."
+				},
+				{
+					"step": 5,
+					"topic": "CI/CD",
+					"description": "Automate deployment pipelines."
+				}
+			],
+			"quiz": [
+				{
+					"id": 1,
+					"question": "Which tool is known for 'Infrastructure as Code'?",
+					"options": [
+						"Jenkins",
+						"Docker",
+						"Terraform",
+						"Git"
+					],
+					"correct": 2
+				},
+				{
+					"id": 2,
+					"question": "What does CI stand for?",
+					"options": [
+						"Continuous Improvement",
+						"Continuous Integration",
+						"Code Inspection",
+						"Cloud Integration"
+					],
+					"correct": 1
+				}
 			]
 		},
 		"cyber_security_analyst": {
@@ -134,6 +380,51 @@
 					"title": "OWASP",
 					"url": "https://owasp.org/"
 				}
+			],
+			"market_data": {
+				"avg_salary": "$105,000",
+				"open_roles": "20,000+",
+				"growth_rate": "+25%"
+			},
+			"roadmap": [
+				{
+					"step": 1,
+					"topic": "Networking Basics",
+					"description": "Understand TCP/IP, OSI model, and DNS."
+				},
+				{
+					"step": 2,
+					"topic": "Linux Admin",
+					"description": "Command line proficiency and permissions."
+				},
+				{
+					"step": 3,
+					"topic": "Security Tools",
+					"description": "Wireshark, Nmap, and Metasploit."
+				},
+				{
+					"step": 4,
+					"topic": "Vulnerability Analysis",
+					"description": "Identify weak points in systems."
+				},
+				{
+					"step": 5,
+					"topic": "Incident Response",
+					"description": "Detecting and responding to attacks."
+				}
+			],
+			"quiz": [
+				{
+					"id": 1,
+					"question": "Which protocol is secure?",
+					"options": [
+						"HTTP",
+						"FTP",
+						"HTTPS",
+						"Telnet"
+					],
+					"correct": 2
+				}
 			]
 		},
 		"mobile_developer": {
@@ -158,6 +449,51 @@
 					"title": "React Native Docs",
 					"url": "https://reactnative.dev/"
 				}
+			],
+			"market_data": {
+				"avg_salary": "$110,000",
+				"open_roles": "35,000+",
+				"growth_rate": "+12%"
+			},
+			"roadmap": [
+				{
+					"step": 1,
+					"topic": "Language Basics",
+					"description": "Swift/Kotlin or JS/Dart."
+				},
+				{
+					"step": 2,
+					"topic": "UI/UX for Mobile",
+					"description": "Touch targets, navigation patterns, and responsiveness."
+				},
+				{
+					"step": 3,
+					"topic": "State Management",
+					"description": "Redux, Provider, or native observables."
+				},
+				{
+					"step": 4,
+					"topic": "Backend Integration",
+					"description": "Firebase or REST APIs."
+				},
+				{
+					"step": 5,
+					"topic": "Publishing",
+					"description": "App Store and Play Store guidelines."
+				}
+			],
+			"quiz": [
+				{
+					"id": 1,
+					"question": "Which framework uses Dart?",
+					"options": [
+						"React Native",
+						"Flutter",
+						"Ionic",
+						"Xamarin"
+					],
+					"correct": 1
+				}
 			]
 		},
 		"cloud_architect": {
@@ -178,7 +514,35 @@
 					"title": "AWS Training",
 					"url": "https://aws.amazon.com/training/"
 				}
-			]
+			],
+			"market_data": {
+				"avg_salary": "$150,000",
+				"open_roles": "12,000+",
+				"growth_rate": "+22%"
+			},
+			"roadmap": [
+				{
+					"step": 1,
+					"topic": "Cloud Basics",
+					"description": "Understand IaaS, PaaS, SaaS."
+				},
+				{
+					"step": 2,
+					"topic": "Networking",
+					"description": "VPC, Subnets, and Load Balancers."
+				},
+				{
+					"step": 3,
+					"topic": "Security",
+					"description": "IAM roles and policies."
+				},
+				{
+					"step": 4,
+					"topic": "Architecting",
+					"description": "High availability and fault tolerance."
+				}
+			],
+			"quiz": []
 		},
 		"ui_ux_designer": {
 			"title": "UI/UX Designer",
@@ -203,7 +567,35 @@
 					"title": "Laws of UX",
 					"url": "https://lawsofux.com/"
 				}
-			]
+			],
+			"market_data": {
+				"avg_salary": "$90,000",
+				"open_roles": "28,000+",
+				"growth_rate": "+10%"
+			},
+			"roadmap": [
+				{
+					"step": 1,
+					"topic": "Design Fundamentals",
+					"description": "Color, Typography, Spacing."
+				},
+				{
+					"step": 2,
+					"topic": "Tools",
+					"description": "Master Figma or Adobe XD."
+				},
+				{
+					"step": 3,
+					"topic": "UX Research",
+					"description": "User personas and journeys."
+				},
+				{
+					"step": 4,
+					"topic": "Prototyping",
+					"description": "Interactive flows."
+				}
+			],
+			"quiz": []
 		},
 		"blockchain_developer": {
 			"title": "Blockchain Developer",
@@ -227,7 +619,30 @@
 					"title": "Ethereum Docs",
 					"url": "https://ethereum.org/en/developers/"
 				}
-			]
+			],
+			"market_data": {
+				"avg_salary": "$130,000",
+				"open_roles": "5,000+",
+				"growth_rate": "+40%"
+			},
+			"roadmap": [
+				{
+					"step": 1,
+					"topic": "Blockchain Basics",
+					"description": "How distributed ledgers work."
+				},
+				{
+					"step": 2,
+					"topic": "Smart Contracts",
+					"description": "Writing logic on-chain with Solidity."
+				},
+				{
+					"step": 3,
+					"topic": "DApps",
+					"description": "Connecting frontends to the blockchain."
+				}
+			],
+			"quiz": []
 		},
 		"game_developer": {
 			"title": "Game Developer",
@@ -251,7 +666,30 @@
 					"title": "Unreal Engine Online Learning",
 					"url": "https://www.unrealengine.com/en-US/onlinelearning-courses"
 				}
-			]
+			],
+			"market_data": {
+				"avg_salary": "$85,000",
+				"open_roles": "8,000+",
+				"growth_rate": "+8%"
+			},
+			"roadmap": [
+				{
+					"step": 1,
+					"topic": "C#/C++",
+					"description": "Programming foundations."
+				},
+				{
+					"step": 2,
+					"topic": "Engine Basics",
+					"description": "Unity or Unreal interface."
+				},
+				{
+					"step": 3,
+					"topic": "Game Logic",
+					"description": "Input, Physics, and Collisions."
+				}
+			],
+			"quiz": []
 		},
 		"quantum_researcher": {
 			"title": "Quantum Computing Researcher",
@@ -269,7 +707,25 @@
 					"title": "Qiskit Textbook",
 					"url": "https://qiskit.org/textbook/preface.html"
 				}
-			]
+			],
+			"market_data": {
+				"avg_salary": "$160,000",
+				"open_roles": "1,000+",
+				"growth_rate": "+50%"
+			},
+			"roadmap": [
+				{
+					"step": 1,
+					"topic": "Physics Base",
+					"description": "Quantum Mechanics principles."
+				},
+				{
+					"step": 2,
+					"topic": "Qiskit",
+					"description": "Writing quantum circuits in Python."
+				}
+			],
+			"quiz": []
 		}
 	}
 }

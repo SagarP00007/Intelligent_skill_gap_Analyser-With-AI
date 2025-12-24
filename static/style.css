@@ -1,32 +1,35 @@
 :root {
-    /* Palette: Cosmic Glass (Vibrant & Deep) */
-    --primary-color: #8b5cf6;
-    /* Violet-500: Vibrant purple */
-    --primary-hover: #a78bfa;
-    /* Violet-400: Light purple */
-    --accent-color: #2dd4bf;
-    /* Teal-400: Neon Cyan for pop */
+    /* Palette: Neon Cyber (High Contrast & Vibrant) */
+    --primary-color: #d946ef;
+    /* Fuchsia-500: Neon Pink/Purple */
+    --primary-hover: #e879f9;
+    /* Fuchsia-400 */
+    --accent-color: #00f3ff;
+    /* Cyan: Electric Blue */
 
-    --bg-gradient-start: #0f172a;
+    /* Backgrounds */
+    --bg-gradient-start: #020617;
+    /* Slate-950: Almost Black */
+    --bg-gradient-end: #0f172a;
     /* Slate-900: Deep Night */
-    --bg-gradient-end: #312e81;
-    /* Indigo-900: Deep Indigo */
 
-    --glass-bg: rgba(30, 41, 59, 0.7);
-    /* Darker glass for better contrast */
-    --glass-border: rgba(139, 92, 246, 0.3);
-    /* Purple tinted border */
+    --glass-bg: rgba(15, 23, 42, 0.6);
+    /* Darker, deeper glass */
+    --glass-border: rgba(217, 70, 239, 0.3);
+    /* Pink tinted border */
+    --glass-highlight: rgba(255, 255, 255, 0.05);
 
     --text-main: #ffffff;
-    /* Pure white for max contrast */
-    --text-muted: #cbd5e1;
-    /* Slate-300: Light grey */
+    --text-muted: #94a3b8;
+    /* Slate-400 */
 
     --font-family: 'Outfit', sans-serif;
-    --success-color: #34d399;
-    /* Emerald-400 */
-    --warning-color: #fbbf24;
-    /* Amber-400 */
+
+    --success-color: #22c55e;
+    /* Green-500 */
+    --warning-color: #f59e0b;
+    /* Amber-500 */
+    --error-color: #ef4444;
 }
 
 * {
@@ -37,7 +40,9 @@
 
 body {
     font-family: var(--font-family);
-    background: linear-gradient(135deg, var(--bg-gradient-start), var(--bg-gradient-end));
+    background-color: var(--bg-gradient-start);
+    /* Fallback */
+    /* Background is handled by Three.js canvas now */
     color: var(--text-main);
     min-height: 100vh;
     display: flex;
@@ -48,61 +53,16 @@ body {
     overflow-x: hidden;
 }
 
-/* Animated Background Blobs */
-.background-blobs {
-    position: absolute;
+/* Canvas Container */
+#canvas-container {
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    overflow: hidden;
     z-index: -1;
-}
-
-.blob {
-    position: absolute;
-    filter: blur(80px);
-    opacity: 0.6;
-    animation: moveBlob 20s infinite alternate;
-}
-
-.blob-1 {
-    top: -10%;
-    left: -10%;
-    width: 500px;
-    height: 500px;
-    background: var(--primary-color);
-    border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
-}
-
-.blob-2 {
-    bottom: -10%;
-    right: -10%;
-    width: 400px;
-    height: 400px;
-    background: var(--accent-color);
-    border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
-    animation-delay: -5s;
-}
-
-.blob-3 {
-    top: 40%;
-    left: 40%;
-    width: 300px;
-    height: 300px;
-    background: #8b5cf6;
-    border-radius: 50%;
-    animation-delay: -10s;
-}
-
-@keyframes moveBlob {
-    0% {
-        transform: translate(0, 0) rotate(0deg);
-    }
-
-    100% {
-        transform: translate(50px, 50px) rotate(20deg);
-    }
+    background: radial-gradient(circle at center, #1e1b4b 0%, #020617 100%);
+    /* Deep space gradient behind stars */
 }
 
 /* Layout Container */
