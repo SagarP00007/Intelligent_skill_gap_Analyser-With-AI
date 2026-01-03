@@ -1,0 +1,46 @@
+{
+	"web_developer": {
+		"avg_salary": "₹5,50,000",
+		"growth_rate": "+14.5%"
+	},
+	"data_scientist": {
+		"avg_salary": "₹11,20,000",
+		"growth_rate": "+28.3%"
+	},
+	"ai_engineer": {
+		"avg_salary": "₹14,50,000",
+		"growth_rate": "+35.5%"
+	},
+	"devops_engineer": {
+		"avg_salary": "₹9,80,000",
+		"growth_rate": "+22.1%"
+	},
+	"cyber_security_analyst": {
+		"avg_salary": "₹8,90,000",
+		"growth_rate": "+18.4%"
+	},
+	"mobile_developer": {
+		"avg_salary": "₹7,20,000",
+		"growth_rate": "+12.8%"
+	},
+	"cloud_architect": {
+		"avg_salary": "₹21,50,000",
+		"growth_rate": "+24.0%"
+	},
+	"ui_ux_designer": {
+		"avg_salary": "₹6,80,000",
+		"growth_rate": "+11.2%"
+	},
+	"blockchain_developer": {
+		"avg_salary": "₹13,00,000",
+		"growth_rate": "+41.0%"
+	},
+	"game_developer": {
+		"avg_salary": "₹5,20,000",
+		"growth_rate": "+9.5%"
+	},
+	"quantum_researcher": {
+		"avg_salary": "₹18,00,000",
+		"growth_rate": "+48.0%"
+	}
+}

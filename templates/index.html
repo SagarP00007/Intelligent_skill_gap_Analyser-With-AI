@@ -14,15 +14,24 @@
                 </div>
             </div>
             <!-- Quick Stats or Search could go here -->
+            <!-- Quick Stats or Search could go here -->
             <div style="display:flex; gap:10px;">
-                <button class="icon-btn"
-                    style="background:rgba(255,255,255,0.1); width:40px; height:40px; padding:0;"><i
-                        class="ph-bold ph-bell"></i></button>
-                <button class="icon-btn"
-                    style="background:rgba(255,255,255,0.1); width:40px; height:40px; padding:0;"><i
+                {% if current_user.is_authenticated %}
+                <button class="icon-btn" id="settingsBtn"
+                    style="background:rgba(255,255,255,0.1); width:40px; height:40px; padding:0;" title="Settings"><i
                         class="ph-bold ph-gear"></i></button>
+                {% endif %}
             </div>
         </header>
+    </div>
+
+    <!-- Scanner Overlay (Hidden by default) -->
+    <div id="scannerOverlay" class="scanning-overlay hidden">
+        <div class="scanner-line"></div>
+        <div class="hologram-text">ANALYZING SKILL MATRIX...</div>
+        <div style="margin-top:20px; color:rgba(255,255,255,0.5); font-size:0.9rem;">
+            Accessing Neural Network...
+        </div>
     </div>
 
     <!-- ROW 1: Configuration & Resume (Side by Side) -->
@@ -30,15 +39,16 @@
     <!-- Configuration Section (Left) -->
     <div class="dashboard-card col-span-6">
         <div class="card-header">
-            <span class="card-title"><i class="ph-bold ph-sliders-horizontal card-icon"></i> Configuration</span>
+            <span class="card-title"><i class="ph-bold ph-sliders-horizontal card-icon"></i> MISSION
+                CONFIGURATION</span>
         </div>
 
         <section class="input-section">
             <div class="form-group">
-                <label for="career"><i class="ph-bold ph-briefcase"></i> Target Role</label>
+                <label for="career">TARGET OBJECTIVE (ROLE)</label>
                 <div class="select-wrapper">
                     <select id="career">
-                        <option value="" disabled selected>Select your dream role...</option>
+                        <option value="" disabled selected>Select Target Designation...</option>
                         {% for role in roles %}
                         <option value="{{ role.key }}">{{ role.title }}</option>
                         {% endfor %}
@@ -48,24 +58,23 @@
             </div>
 
             <div class="form-group">
-                <label><i class="ph-bold ph-code"></i> Add Skills</label>
-                <div class="skill-input-group" style="flex-direction:column;">
-                    <input type="text" id="skillName" placeholder="Skill Name">
-                    <div style="display:flex; gap:10px;">
-                        <div class="select-wrapper" style="flex:1;">
-                            <select id="proficiencyLevel">
-                                <option value="" disabled selected>Level</option>
-                                <option value="Beginner">Beginner</option>
-                                <option value="Intermediate">Intermediate</option>
-                                <option value="Advanced">Advanced</option>
-                                <option value="Expert">Expert</option>
-                            </select>
-                            <i class="ph-bold ph-caret-down select-icon"></i>
-                        </div>
-                        <button type="button" id="addSkillBtn" class="icon-btn" style="width:50px;">
-                            <i class="ph-bold ph-plus"></i>
-                        </button>
+                <label>ACQUIRED CAPABILITIES (SKILLS)</label>
+                <div class="skill-input-group" style="flex-direction:row; gap:10px;">
+                    <div style="flex:2;">
+                        <input type="text" id="skillName" placeholder="e.g. Python Protocol">
                     </div>
+                    <div class="select-wrapper" style="flex:1;">
+                        <select id="proficiencyLevel">
+                            <option value="" disabled selected>Lvl</option>
+                            <option value="Beginner">Lvl 1</option>
+                            <option value="Intermediate">Lvl 2</option>
+                            <option value="Advanced">Lvl 3</option>
+                            <option value="Expert">Lvl 4</option>
+                        </select>
+                    </div>
+                    <button type="button" id="addSkillBtn" class="icon-btn" style="width:50px;">
+                        <i class="ph-bold ph-plus"></i>
+                    </button>
                 </div>
             </div>
 
@@ -73,9 +82,9 @@
                 <!-- Added skills -->
             </div>
 
-            <button id="analyzeBtn" style="margin-top:20px; width:100%;">
-                <span>Analyze Gap</span>
-                <i class="ph-bold ph-arrow-right"></i>
+            <button id="analyzeBtn" style="margin-top:30px; width:100%;">
+                <span>INITIATE ANALYSIS</span>
+                <i class="ph-bold ph-lightning"></i>
             </button>
         </section>
     </div>
@@ -83,42 +92,36 @@
     <!-- Resume Analysis Section (Right) -->
     <div class="dashboard-card col-span-6">
         <div class="card-header" style="cursor: pointer;" onclick="toggleResumeSection()">
-            <span class="card-title"><i class="ph-bold ph-file-text card-icon"></i> AI Resume Scanner</span>
+            <span class="card-title"><i class="ph-bold ph-scan card-icon"></i> BIOMETRIC RESUME SCAN</span>
             <i class="ph-bold ph-caret-down" id="resumeToggleIcon"></i>
         </div>
 
         <div id="resumeSection" class="hidden" style="margin-bottom: 20px; padding-bottom: 20px;">
-            <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 10px;">
-                Upload your resume (PDF, DOCX, TXT) to auto-extract skills.
+            <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 20px;">
+                Upload personnel file (PDF/DOCX) for auto-extraction.
             </p>
 
-            <div id="dropZone" style="
-                border: 2px dashed var(--glass-border);
-                border-radius: 8px;
-                padding: 20px;
-                text-align: center;
-                margin-bottom: 15px;
-                cursor: pointer;
-                transition: all 0.2s;
-                background: rgba(15, 23, 42, 0.4);
-            " ondragover="event.preventDefault(); this.style.borderColor='var(--primary-color)';"
-                ondragleave="this.style.borderColor='var(--glass-border)';"
-                ondrop="event.preventDefault(); this.style.borderColor='var(--glass-border)'; handleDrop(event);">
+            <div id="dropZone" ondragover="event.preventDefault(); this.classList.add('dragover');"
+                ondragleave="this.classList.remove('dragover');"
+                ondrop="event.preventDefault(); this.classList.remove('dragover'); handleDrop(event);">
                 <i class="ph-bold ph-upload-simple"
-                    style="font-size: 1.5rem; color: var(--primary-color); margin-bottom: 5px;"></i>
-                <p style="font-size: 0.9rem;">Click or Drag file here</p>
+                    style="font-size: 2rem; color: var(--primary-color); margin-bottom: 10px;"></i>
+                <p style="font-size: 1rem; font-weight:600;">DRAG DATA PACKET HERE</p>
+                <p style="font-size: 0.8rem; color: var(--text-muted);">or click to browse local drive</p>
                 <input type="file" id="resumeFile" accept=".pdf,.docx,.txt" style="display: none;"
                     onchange="handleFileSelect(this)">
                 <p id="fileName"
-                    style="font-size: 0.8rem; color: var(--success-color); margin-top: 5px; height: 1.2em;"></p>
+                    style="font-size: 0.9rem; color: var(--accent-color); margin-top: 10px; height: 1.2em; font-family:monospace;">
+                </p>
             </div>
 
-            <button type="button" id="extractSkillsBtn" style="width: 100%; font-size: 0.95rem; padding: 12px;">
-                <i class="ph-bold ph-magic-wand"></i> Extract Skills from File
+            <button type="button" id="extractSkillsBtn"
+                style="width: 100%; font-size: 0.95rem; padding: 12px; margin-top:20px;">
+                <i class="ph-bold ph-magic-wand"></i> EXTRACT DATA
             </button>
             <div id="extractLoading" class="hidden"
-                style="text-align: center; margin-top: 10px; font-size: 0.9rem; color: var(--accent-color);">
-                <i class="ph-bold ph-spinner ph-spin"></i> Analyzing...
+                style="text-align: center; margin-top: 15px; font-size: 0.9rem; color: var(--accent-color); font-family:monospace;">
+                <i class="ph-bold ph-spinner ph-spin"></i> PROCESSING ENCRYPTION...
             </div>
         </div>
     </div>
@@ -126,67 +129,85 @@
     <!-- ROW 2: Results (Full Width) -->
 
     <!-- Results Column (Bottom) -->
-    <div class="dashboard-card col-span-12" style="min-height: 500px;">
+    <div class="dashboard-card col-span-12" style="min-height: 500px; display:none;" id="resultsCard">
         <div class="card-header">
-            <span class="card-title"><i class="ph-bold ph-chart-bar card-icon"></i> Analysis Results</span>
+            <span class="card-title"><i class="ph-bold ph-chart-polar card-icon"></i> TACTICAL ANALYSIS</span>
         </div>
 
-        <div id="loading" class="hidden" style="margin-top:50px;">
-            <div class="spinner"></div>
-            <p>Analyzing market trends & your profile...</p>
-        </div>
+        <!-- No loading here anymore, using overlay -->
 
-        <section id="result" class="result-section hidden">
-            <!-- Market Data Banner -->
-            <div id="marketData" class="market-banner hidden">
+        <section id="result" class="result-section">
+            <div id="marketData" class="market-banner hidden"
+                style="display:grid; grid-template-columns:1fr 1fr; gap:20px; text-align:center; margin-bottom:30px;">
                 <!-- Injected via JS -->
             </div>
 
             <div class="results-grid"
-                style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 20px;">
+                style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 20px;">
                 <!-- Left: Missing Skills & Recommendations -->
                 <div class="skills-column">
                     <div class="result-header">
-                        <i class="ph-bold ph-warning-circle"></i> Skill Gap Analysis
+                        <i class="ph-bold ph-warning-diamond"></i> CRITICAL GAPS DETECTED
                     </div>
                     <div id="missingSkillsContainer" class="tags-container"></div>
 
-                    <!-- Quiz Call to Action -->
-                    <div id="quizCTA" class="quiz-cta hidden"
-                        style="margin-top: 20px; padding: 15px; background: rgba(var(--primary-rgb), 0.1); border-radius: 8px; border: 1px solid var(--primary-color);">
-                        <h4><i class="ph-bold ph-exam"></i> Test Your Knowledge</h4>
-                        <p style="font-size: 0.9rem; margin-bottom: 10px;">Take a quick 3-question quiz for this role.
-                        </p>
-                        <button id="startQuizBtn" class="small-btn">Start Quiz</button>
-                    </div>
-
-                    <div class="result-header" style="margin-top:20px;">
-                        <i class="ph-bold ph-strategy"></i> Recommended Resources
+                    <div class="result-header" style="margin-top:40px;">
+                        <i class="ph-bold ph-books"></i> TACTICAL RESOURCES
                     </div>
                     <ul id="recommendationsList" class="recommendations-list"></ul>
+
+                    <!-- Strategic Alternatives -->
+                    <div id="alternativesContainer" class="hidden"
+                        style="margin-top:30px; border-top:1px solid rgba(255,255,255,0.1); padding-top:20px;">
+                        <div class="result-header">
+                            <i class="ph-bold ph-crosshair"></i> HIGH MATCH ALTERNATIVES
+                        </div>
+                        <div id="alternativesList"
+                            style="display:flex; flex-direction:column; gap:10px; margin-top:15px;"></div>
+                    </div>
                 </div>
 
                 <!-- Right: Learning Roadmap -->
                 <div class="roadmap-column">
                     <div class="result-header">
-                        <i class="ph-bold ph-path"></i> Learning Roadmap
+                        <i class="ph-bold ph-path"></i> EXECUTION ROADMAP
                     </div>
-                    <div id="roadmapContainer" class="roadmap-timeline">
+                    <div id="roadmapContainer" class="roadmap-timeline" style="margin-top:20px;">
                         <!-- Injected via JS -->
                     </div>
                 </div>
             </div>
-
-            <!-- Quiz Modal -->
-            <div id="quizModal" class="modal hidden">
-                <div class="modal-content">
-                    <span class="close-modal">&times;</span>
-                    <h3>Skill Quiz</h3>
-                    <div id="quizQuestions"></div>
-                    <div id="quizResult" class="hidden"></div>
-                </div>
-            </div>
         </section>
+    </div>
+    <!-- Settings Modal -->
+    <div id="settingsModal" class="modal hidden"
+        style="position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8); backdrop-filter:blur(20px); z-index:200; display:flex; justify-content:center; align-items:center;">
+        <div class="modal-content dashboard-card" style="width:450px; max-width:90%;">
+            <div style="display:flex; justify-content:space-between; margin-bottom:20px;">
+                <span class="card-title"><i class="ph-bold ph-gear"></i> SYSTEM CONFIGURATION</span>
+                <span id="closeSettings" style="cursor:pointer; color:var(--text-muted);"><i
+                        class="ph-bold ph-x"></i></span>
+            </div>
+
+            <form id="settingsForm" style="display:flex; flex-direction:column; gap:15px;">
+                <div class="form-group">
+                    <label>OPERATOR ALIAS (USERNAME)</label>
+                    <input type="text" id="settingsUsername" placeholder="Username">
+                </div>
+                <div class="form-group">
+                    <label>COMM LINK (EMAIL)</label>
+                    <input type="email" id="settingsEmail" placeholder="Email Address">
+                </div>
+                <div class="form-group">
+                    <label>SECURITY TOKEN (NEW PASSWORD)</label>
+                    <input type="password" id="settingsPassword" placeholder="Leave blank to keep current">
+                </div>
+
+                <button type="submit" id="saveSettingsBtn" style="margin-top:10px;">
+                    <i class="ph-bold ph-floppy-disk"></i> UPDATE CONFIG
+                </button>
+            </form>
+        </div>
     </div>
 </div>
 {% endblock %}

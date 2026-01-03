@@ -41,6 +41,15 @@ def load_user(user_id):
     return db.session.get(User, int(user_id))
 
 # Load skills dataset from external JSON file
+@app.route('/api/market_data/<role_key>')
+def get_market_data(role_key):
+    try:
+        with open('market_data_india.json', 'r', encoding='utf-8') as f:
+            data = json.load(f)
+        return jsonify(data.get(role_key, {"avg_salary": "N/A", "growth_rate": "N/A"}))
+    except FileNotFoundError:
+        return jsonify({"avg_salary": "N/A", "growth_rate": "N/A"})
+
 def load_skills():
     try:
         with open('skills.json', 'r') as f:
@@ -89,12 +98,47 @@ def analyze():
         for res in role_info['resources']:
             recommendations.append(f"Check out: <a href='{res['url']}' target='_blank' style='color: var(--primary-color); text-decoration: underline;'>{res['title']}</a>")
 
+    # Fetch Real Indian Market Data
+    try:
+        with open('market_data_india.json', 'r', encoding='utf-8') as f:
+            market_db = json.load(f)
+            market_info = market_db.get(role_key, {})
+    except:
+        market_info = {}
+
+    # Calculate skill overlap for other roles (Strategic Pivot Opportunities)
+    alternative_paths = []
+    for r_key, r_info in skills_data['roles'].items():
+        if r_key == role_key:
+            continue # Skip the current target
+            
+        r_required = set(s.lower() for s in r_info['skills'])
+        if not r_required:
+            continue
+            
+        # Calculate overlap
+        common_skills = r_required.intersection(current_skills)
+        match_score = (len(common_skills) / len(r_required)) * 100
+        
+        # If sensible match found (> 20% to ensure relevance)
+        if match_score >= 10: 
+            alternative_paths.append({
+                "role": r_info['title'],
+                "match_score": round(match_score),
+                "missing_count": len(r_required) - len(common_skills)
+            })
+            
+    # Sort by highest match first
+    alternative_paths.sort(key=lambda x: x['match_score'], reverse=True)
+    top_alternatives = alternative_paths[:2] # Take top 2
+
     return jsonify({
         "career": career_display_name,
         "missing_skills": missing,
         "recommendations": recommendations,
-        "market_data": role_info.get('market_data', {}),
-        "roadmap": role_info.get('roadmap', [])
+        "market_data": market_info, 
+        "roadmap": role_info.get('roadmap', []),
+        "alternatives": top_alternatives
     })
 
 @app.route('/api/extract_skills', methods=['POST'])
@@ -176,13 +220,6 @@ def get_history():
         "date": h.timestamp.strftime('%Y-%m-%d')
     } for h in history])
 
-@app.route('/api/quiz/<role_key>')
-def get_quiz(role_key):
-    skills_data = load_skills()
-    if role_key in skills_data['roles'] and 'quiz' in skills_data['roles'][role_key]:
-        return jsonify(skills_data['roles'][role_key]['quiz'])
-    return jsonify([])
-
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     if request.method == 'POST':
@@ -224,6 +261,43 @@ def login():
 def logout():
     logout_user()
     return redirect(url_for('home'))
+
+@app.route('/api/update_profile', methods=['POST'])
+@login_required
+def update_profile():
+    data = request.json
+    user = current_user
+    
+    username = data.get('username')
+    email = data.get('email')
+    password = data.get('password')
+    
+    if username:
+        # Check uniqueness if changed
+        if username != user.username and User.query.filter_by(username=username).first():
+            return jsonify({"error": "Username already taken"}), 400
+        user.username = username
+        
+    if email:
+        # Check uniqueness if changed
+        if email != user.email and User.query.filter_by(email=email).first():
+            return jsonify({"error": "Email already in use"}), 400
+        user.email = email
+        
+    if password:
+        user.password = generate_password_hash(password, method='scrypt')
+        
+    db.session.commit()
+    return jsonify({"message": "Profile updated successfully"})
+    
+@app.route('/api/user_info')
+@login_required
+def user_info():
+    return jsonify({
+        "username": current_user.username,
+        "email": current_user.email
+    })
+
 
 if __name__ == '__main__':
     with app.app_context():
